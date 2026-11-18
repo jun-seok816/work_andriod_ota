@@ -1,0 +1,2678 @@
+{
+  "id": "69f9ae44-4e18-476f-a4b4-3b34cf2a2db2",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.api_keys": {
+      "name": "api_keys",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(255) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "hash": {
+          "name": "hash",
+          "type": "varchar(64) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(64) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "prefix": {
+          "name": "prefix",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at_ms": {
+          "name": "created_at_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "revoked_at_ms": {
+          "name": "revoked_at_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "api_keys_byCreated": {
+          "name": "api_keys_byCreated",
+          "columns": [
+            {
+              "expression": "created_at_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "api_keys_hash": {
+          "name": "api_keys_hash",
+          "columns": [
+            {
+              "expression": "hash",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "api_keys_id_pk": {
+          "name": "api_keys_id_pk",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.bundle_event_heads": {
+      "name": "bundle_event_heads",
+      "schema": "",
+      "columns": {
+        "install_id": {
+          "name": "install_id",
+          "type": "varchar(255) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(32) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar(255) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "from_release_id": {
+          "name": "from_release_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "from_bundle_id": {
+          "name": "from_bundle_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "to_release_id": {
+          "name": "to_release_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "to_bundle_id": {
+          "name": "to_bundle_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "platform": {
+          "name": "platform",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "app_version": {
+          "name": "app_version",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "channel": {
+          "name": "channel",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "received_at_ms": {
+          "name": "received_at_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "bundle_event_heads_byUser": {
+          "name": "bundle_event_heads_byUser",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "install_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "bundle_event_heads__retention": {
+          "name": "bundle_event_heads__retention",
+          "columns": [
+            {
+              "expression": "received_at_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "install_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "bundle_event_heads_install_id_pk": {
+          "name": "bundle_event_heads_install_id_pk",
+          "columns": [
+            "install_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.bundle_events": {
+      "name": "bundle_events",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(32) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "install_id": {
+          "name": "install_id",
+          "type": "varchar(255) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar(255) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "from_release_id": {
+          "name": "from_release_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "from_bundle_id": {
+          "name": "from_bundle_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "to_release_id": {
+          "name": "to_release_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "to_bundle_id": {
+          "name": "to_bundle_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "platform": {
+          "name": "platform",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "app_version": {
+          "name": "app_version",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "channel": {
+          "name": "channel",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "received_at_ms": {
+          "name": "received_at_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "day": {
+          "name": "day",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "movement_install_id": {
+          "name": "movement_install_id",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bundle_ref": {
+          "name": "bundle_ref",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "bundle_events_movementsByInstall": {
+          "name": "bundle_events_movementsByInstall",
+          "columns": [
+            {
+              "expression": "movement_install_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "received_at_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "bundle_events_byDay": {
+          "name": "bundle_events_byDay",
+          "columns": [
+            {
+              "expression": "day",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "received_at_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "bundle_events_id_pk": {
+          "name": "bundle_events_id_pk",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.bundle_events__byBundle": {
+      "name": "bundle_events__byBundle",
+      "schema": "",
+      "columns": {
+        "platform": {
+          "name": "platform",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "channel": {
+          "name": "channel",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(32) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bundle_ref": {
+          "name": "bundle_ref",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "day": {
+          "name": "day",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "received_at_ms": {
+          "name": "received_at_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "bundle_events__byBundle_platform_channel_type_bundle_ref_day_received_at_ms_id_pk": {
+          "name": "bundle_events__byBundle_platform_channel_type_bundle_ref_day_received_at_ms_id_pk",
+          "columns": [
+            "platform",
+            "channel",
+            "type",
+            "bundle_ref",
+            "day",
+            "received_at_ms",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.bundle_patches": {
+      "name": "bundle_patches",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(255) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bundle_id": {
+          "name": "bundle_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "base_bundle_id": {
+          "name": "base_bundle_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "base_file_hash": {
+          "name": "base_file_hash",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "patch_file_hash": {
+          "name": "patch_file_hash",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "patch_storage_uri": {
+          "name": "patch_storage_uri",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "byte_size": {
+          "name": "byte_size",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "order_index": {
+          "name": "order_index",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "bundle_patches_pair": {
+          "name": "bundle_patches_pair",
+          "columns": [
+            {
+              "expression": "bundle_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "base_bundle_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "bundle_patches_byBundle": {
+          "name": "bundle_patches_byBundle",
+          "columns": [
+            {
+              "expression": "bundle_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "order_index",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "bundle_patches_byBase": {
+          "name": "bundle_patches_byBase",
+          "columns": [
+            {
+              "expression": "base_bundle_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "bundle_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "bundle_patches_id_pk": {
+          "name": "bundle_patches_id_pk",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.bundle_totals": {
+      "name": "bundle_totals",
+      "schema": "",
+      "columns": {
+        "platform_key": {
+          "name": "platform_key",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_shard": {
+          "name": "_shard",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bundles": {
+          "name": "bundles",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "bundle_totals_platform_key__shard_pk": {
+          "name": "bundle_totals_platform_key__shard_pk",
+          "columns": [
+            "platform_key",
+            "_shard"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.bundles": {
+      "name": "bundles",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "platform": {
+          "name": "platform",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "git_commit_hash": {
+          "name": "git_commit_hash",
+          "type": "varchar(255) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "manifest_storage_uri": {
+          "name": "manifest_storage_uri",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "manifest_file_hash": {
+          "name": "manifest_file_hash",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "asset_base_storage_uri": {
+          "name": "asset_base_storage_uri",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_refs_bundle_patches_bundle_id": {
+          "name": "_refs_bundle_patches_bundle_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "_refs_bundle_patches_base_bundle_id": {
+          "name": "_refs_bundle_patches_base_bundle_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "_refs_releases_bundle_id": {
+          "name": "_refs_releases_bundle_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "bundles_byPlatform": {
+          "name": "bundles_byPlatform",
+          "columns": [
+            {
+              "expression": "platform",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "bundles_id_pk": {
+          "name": "bundles_id_pk",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.channels": {
+      "name": "channels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(1408) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_refs_releases_channel_id": {
+          "name": "_refs_releases_channel_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "channels_all": {
+          "name": "channels_all",
+          "columns": [
+            {
+              "expression": "name",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "channels_name": {
+          "name": "channels_name",
+          "columns": [
+            {
+              "expression": "name",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "channels_id_pk": {
+          "name": "channels_id_pk",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.insights_builtin_distribution": {
+      "name": "insights_builtin_distribution",
+      "schema": "",
+      "columns": {
+        "channel": {
+          "name": "channel",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "platform": {
+          "name": "platform",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "app_version": {
+          "name": "app_version",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "release_id": {
+          "name": "release_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "builtin_bundle_id": {
+          "name": "builtin_bundle_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bucket_start_ms": {
+          "name": "bucket_start_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_shard": {
+          "name": "_shard",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "latest_installations": {
+          "name": "latest_installations",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "insights_builtin_distribution_byScope": {
+          "name": "insights_builtin_distribution_byScope",
+          "columns": [
+            {
+              "expression": "channel",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "platform",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "bucket_start_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "app_version",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "release_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "builtin_bundle_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "_shard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "insights_builtin_distribution_byVersion": {
+          "name": "insights_builtin_distribution_byVersion",
+          "columns": [
+            {
+              "expression": "channel",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "platform",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "app_version",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "bucket_start_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "release_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "builtin_bundle_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "_shard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "insights_builtin_distribution__retention": {
+          "name": "insights_builtin_distribution__retention",
+          "columns": [
+            {
+              "expression": "bucket_start_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "channel",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "platform",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "app_version",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "release_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "builtin_bundle_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "_shard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "insights_builtin_distribution_channel_platform_app_version_release_id_builtin_bundle_id_bucket_start_ms__shard_pk": {
+          "name": "insights_builtin_distribution_channel_platform_app_version_release_id_builtin_bundle_id_bucket_start_ms__shard_pk",
+          "columns": [
+            "channel",
+            "platform",
+            "app_version",
+            "release_id",
+            "builtin_bundle_id",
+            "bucket_start_ms",
+            "_shard"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.insights_distribution": {
+      "name": "insights_distribution",
+      "schema": "",
+      "columns": {
+        "channel": {
+          "name": "channel",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "platform": {
+          "name": "platform",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "app_version": {
+          "name": "app_version",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "release_id": {
+          "name": "release_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bucket_start_ms": {
+          "name": "bucket_start_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_shard": {
+          "name": "_shard",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "latest_installations": {
+          "name": "latest_installations",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "insights_distribution_byScope": {
+          "name": "insights_distribution_byScope",
+          "columns": [
+            {
+              "expression": "channel",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "platform",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "bucket_start_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "app_version",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "release_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "_shard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "insights_distribution_byVersion": {
+          "name": "insights_distribution_byVersion",
+          "columns": [
+            {
+              "expression": "channel",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "platform",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "app_version",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "bucket_start_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "release_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "_shard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "insights_distribution__retention": {
+          "name": "insights_distribution__retention",
+          "columns": [
+            {
+              "expression": "bucket_start_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "channel",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "platform",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "app_version",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "release_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "_shard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "insights_distribution_channel_platform_app_version_release_id_bucket_start_ms__shard_pk": {
+          "name": "insights_distribution_channel_platform_app_version_release_id_bucket_start_ms__shard_pk",
+          "columns": [
+            "channel",
+            "platform",
+            "app_version",
+            "release_id",
+            "bucket_start_ms",
+            "_shard"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.insights_failures": {
+      "name": "insights_failures",
+      "schema": "",
+      "columns": {
+        "platform": {
+          "name": "platform",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "channel": {
+          "name": "channel",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bucket_start_ms": {
+          "name": "bucket_start_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "release_id": {
+          "name": "release_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "stage": {
+          "name": "stage",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reason": {
+          "name": "reason",
+          "type": "varchar(64) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "detail": {
+          "name": "detail",
+          "type": "varchar(160) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_shard": {
+          "name": "_shard",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "events": {
+          "name": "events",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "insights_failures__retention": {
+          "name": "insights_failures__retention",
+          "columns": [
+            {
+              "expression": "bucket_start_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "platform",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "channel",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "release_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "stage",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "reason",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "detail",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "_shard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "insights_failures_platform_channel_bucket_start_ms_release_id_stage_reason_detail__shard_pk": {
+          "name": "insights_failures_platform_channel_bucket_start_ms_release_id_stage_reason_detail__shard_pk",
+          "columns": [
+            "platform",
+            "channel",
+            "bucket_start_ms",
+            "release_id",
+            "stage",
+            "reason",
+            "detail",
+            "_shard"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.insights_latest_by_bundle": {
+      "name": "insights_latest_by_bundle",
+      "schema": "",
+      "columns": {
+        "platform": {
+          "name": "platform",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "channel": {
+          "name": "channel",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bundle_field": {
+          "name": "bundle_field",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bundle_id": {
+          "name": "bundle_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(32) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bucket_start_ms": {
+          "name": "bucket_start_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_shard": {
+          "name": "_shard",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "installations": {
+          "name": "installations",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "insights_latest_by_bundle__retention": {
+          "name": "insights_latest_by_bundle__retention",
+          "columns": [
+            {
+              "expression": "bucket_start_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "platform",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "channel",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "bundle_field",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "bundle_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "type",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "_shard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "insights_latest_by_bundle_platform_channel_bundle_field_bundle_id_type_bucket_start_ms__shard_pk": {
+          "name": "insights_latest_by_bundle_platform_channel_bundle_field_bundle_id_type_bucket_start_ms__shard_pk",
+          "columns": [
+            "platform",
+            "channel",
+            "bundle_field",
+            "bundle_id",
+            "type",
+            "bucket_start_ms",
+            "_shard"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.insights_outcomes": {
+      "name": "insights_outcomes",
+      "schema": "",
+      "columns": {
+        "platform": {
+          "name": "platform",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "channel": {
+          "name": "channel",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(32) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bundle_ref": {
+          "name": "bundle_ref",
+          "type": "varchar(41) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bucket_start_ms": {
+          "name": "bucket_start_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_shard": {
+          "name": "_shard",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "events": {
+          "name": "events",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "insights_outcomes__retention": {
+          "name": "insights_outcomes__retention",
+          "columns": [
+            {
+              "expression": "bucket_start_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "platform",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "channel",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "type",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "bundle_ref",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "_shard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "insights_outcomes_platform_channel_type_bundle_ref_bucket_start_ms__shard_pk": {
+          "name": "insights_outcomes_platform_channel_type_bundle_ref_bucket_start_ms__shard_pk",
+          "columns": [
+            "platform",
+            "channel",
+            "type",
+            "bundle_ref",
+            "bucket_start_ms",
+            "_shard"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.insights_overview": {
+      "name": "insights_overview",
+      "schema": "",
+      "columns": {
+        "identity": {
+          "name": "identity",
+          "type": "varchar(32) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bucket_start_ms": {
+          "name": "bucket_start_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_shard": {
+          "name": "_shard",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "downloads": {
+          "name": "downloads",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "failed_launches": {
+          "name": "failed_launches",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "patch_downloads": {
+          "name": "patch_downloads",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "patch_fallbacks": {
+          "name": "patch_fallbacks",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "insights_overview__retention": {
+          "name": "insights_overview__retention",
+          "columns": [
+            {
+              "expression": "bucket_start_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "identity",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "_shard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "insights_overview_identity_bucket_start_ms__shard_pk": {
+          "name": "insights_overview_identity_bucket_start_ms__shard_pk",
+          "columns": [
+            "identity",
+            "bucket_start_ms",
+            "_shard"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.insights_overview_daily": {
+      "name": "insights_overview_daily",
+      "schema": "",
+      "columns": {
+        "identity": {
+          "name": "identity",
+          "type": "varchar(32) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bucket_start_ms": {
+          "name": "bucket_start_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_shard": {
+          "name": "_shard",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "downloads": {
+          "name": "downloads",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "failed_launches": {
+          "name": "failed_launches",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "patch_downloads": {
+          "name": "patch_downloads",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "patch_fallbacks": {
+          "name": "patch_fallbacks",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "insights_overview_daily__retention": {
+          "name": "insights_overview_daily__retention",
+          "columns": [
+            {
+              "expression": "bucket_start_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "identity",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "_shard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "insights_overview_daily_identity_bucket_start_ms__shard_pk": {
+          "name": "insights_overview_daily_identity_bucket_start_ms__shard_pk",
+          "columns": [
+            "identity",
+            "bucket_start_ms",
+            "_shard"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.insights_overview_lifetime": {
+      "name": "insights_overview_lifetime",
+      "schema": "",
+      "columns": {
+        "identity": {
+          "name": "identity",
+          "type": "varchar(32) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bucket_start_ms": {
+          "name": "bucket_start_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_shard": {
+          "name": "_shard",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "downloads": {
+          "name": "downloads",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "failed_launches": {
+          "name": "failed_launches",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "patch_downloads": {
+          "name": "patch_downloads",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "patch_fallbacks": {
+          "name": "patch_fallbacks",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "applies": {
+          "name": "applies",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "failed_updates": {
+          "name": "failed_updates",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "insights_overview_lifetime_identity_bucket_start_ms__shard_pk": {
+          "name": "insights_overview_lifetime_identity_bucket_start_ms__shard_pk",
+          "columns": [
+            "identity",
+            "bucket_start_ms",
+            "_shard"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.insights_sketches": {
+      "name": "insights_sketches",
+      "schema": "",
+      "columns": {
+        "identity": {
+          "name": "identity",
+          "type": "varchar(32) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bucket_start_ms": {
+          "name": "bucket_start_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_shard": {
+          "name": "_shard",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "activity_users": {
+          "name": "activity_users",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "failed_users": {
+          "name": "failed_users",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "insights_sketches__retention": {
+          "name": "insights_sketches__retention",
+          "columns": [
+            {
+              "expression": "bucket_start_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "identity",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "_shard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "insights_sketches_identity_bucket_start_ms__shard_pk": {
+          "name": "insights_sketches_identity_bucket_start_ms__shard_pk",
+          "columns": [
+            "identity",
+            "bucket_start_ms",
+            "_shard"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.insights_sketches_daily": {
+      "name": "insights_sketches_daily",
+      "schema": "",
+      "columns": {
+        "identity": {
+          "name": "identity",
+          "type": "varchar(32) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bucket_start_ms": {
+          "name": "bucket_start_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_shard": {
+          "name": "_shard",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "activity_users": {
+          "name": "activity_users",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "failed_users": {
+          "name": "failed_users",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "insights_sketches_daily__retention": {
+          "name": "insights_sketches_daily__retention",
+          "columns": [
+            {
+              "expression": "bucket_start_ms",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "identity",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "_shard",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "insights_sketches_daily_identity_bucket_start_ms__shard_pk": {
+          "name": "insights_sketches_daily_identity_bucket_start_ms__shard_pk",
+          "columns": [
+            "identity",
+            "bucket_start_ms",
+            "_shard"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.insights_sketches_lifetime": {
+      "name": "insights_sketches_lifetime",
+      "schema": "",
+      "columns": {
+        "identity": {
+          "name": "identity",
+          "type": "varchar(32) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bucket_start_ms": {
+          "name": "bucket_start_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_shard": {
+          "name": "_shard",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "failed_users": {
+          "name": "failed_users",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "insights_sketches_lifetime_identity_bucket_start_ms__shard_pk": {
+          "name": "insights_sketches_lifetime_identity_bucket_start_ms__shard_pk",
+          "columns": [
+            "identity",
+            "bucket_start_ms",
+            "_shard"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.private_hot_updater_settings": {
+      "name": "private_hot_updater_settings",
+      "schema": "",
+      "columns": {
+        "key": {
+          "name": "key",
+          "type": "varchar(255) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "varchar(255) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "private_hot_updater_settings_key_pk": {
+          "name": "private_hot_updater_settings_key_pk",
+          "columns": [
+            "key"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.release_catalogs": {
+      "name": "release_catalogs",
+      "schema": "",
+      "columns": {
+        "scope_key": {
+          "name": "scope_key",
+          "type": "varchar(2048) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "catalog_id": {
+          "name": "catalog_id",
+          "type": "varchar(255) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "strategy": {
+          "name": "strategy",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "channel_id": {
+          "name": "channel_id",
+          "type": "varchar(1408) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "channel_key": {
+          "name": "channel_key",
+          "type": "varchar(1400) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "platform": {
+          "name": "platform",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fingerprint_hash": {
+          "name": "fingerprint_hash",
+          "type": "varchar(255) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "generation": {
+          "name": "generation",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "payload": {
+          "name": "payload",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "catalog_hash": {
+          "name": "catalog_hash",
+          "type": "varchar(71) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "byte_size": {
+          "name": "byte_size",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_tombstone": {
+          "name": "is_tombstone",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at_ms": {
+          "name": "updated_at_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "release_catalogs_scope_key_pk": {
+          "name": "release_catalogs_scope_key_pk",
+          "columns": [
+            "scope_key"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.releases": {
+      "name": "releases",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "revision": {
+          "name": "revision",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "scope_key": {
+          "name": "scope_key",
+          "type": "varchar(2048) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "channel_id": {
+          "name": "channel_id",
+          "type": "varchar(1408) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "platform": {
+          "name": "platform",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kind": {
+          "name": "kind",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "bundle_id": {
+          "name": "bundle_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "strategy": {
+          "name": "strategy",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "target_app_version": {
+          "name": "target_app_version",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fingerprint_hash": {
+          "name": "fingerprint_hash",
+          "type": "varchar(255) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "enabled": {
+          "name": "enabled",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "should_force_update": {
+          "name": "should_force_update",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "message": {
+          "name": "message",
+          "type": "text COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rollout_cohort_count": {
+          "name": "rollout_cohort_count",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "target_cohorts": {
+          "name": "target_cohorts",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "operation": {
+          "name": "operation",
+          "type": "varchar(16) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "source_release_id": {
+          "name": "source_release_id",
+          "type": "varchar(36) COLLATE \"C\"",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at_ms": {
+          "name": "created_at_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at_ms": {
+          "name": "updated_at_ms",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_v": {
+          "name": "_v",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "releases_byScope": {
+          "name": "releases_byScope",
+          "columns": [
+            {
+              "expression": "scope_key",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "releases_byScopeEnabled": {
+          "name": "releases_byScopeEnabled",
+          "columns": [
+            {
+              "expression": "scope_key",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "enabled",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "releases_byChannelPlatform": {
+          "name": "releases_byChannelPlatform",
+          "columns": [
+            {
+              "expression": "channel_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "platform",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "releases_byChannelPlatformEnabled": {
+          "name": "releases_byChannelPlatformEnabled",
+          "columns": [
+            {
+              "expression": "channel_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "platform",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "enabled",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "releases_byBundle": {
+          "name": "releases_byBundle",
+          "columns": [
+            {
+              "expression": "bundle_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "releases_id_pk": {
+          "name": "releases_id_pk",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
