@@ -33,7 +33,7 @@ function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Google Play OTA 업데이트 성공!</Text>
+      <Text>OTA 테스트: 새 문구가 적용됐습니다!</Text>
 
       {loading && <ActivityIndicator size="large" />}
 
