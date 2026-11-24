@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "debug:android": "react-native run-android --mode debug",
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
@@ -17,6 +18,7 @@
     "react-native-safe-area-context": "^5.5.2"
   },
   "devDependencies": {
+    "@callstack/repack": "5.4.2",
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
     "@babel/runtime": "^7.25.0",
@@ -40,7 +42,9 @@
     "prettier": "2.8.8",
     "react-native-dotenv": "^5.0.0",
     "react-test-renderer": "19.2.3",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "terser-webpack-plugin": "^5.5.0",
+    "webpack": "^5.111.1"
   },
   "engines": {
     "node": ">= 22.11.0"
