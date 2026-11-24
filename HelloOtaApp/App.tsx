@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { hotUpdater } from './src/hotUpdater';
+import { SERVICE_BASE_URL } from '@env';
 
 type HelloResponse = {
   message: string;
@@ -13,7 +14,7 @@ function App() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch('https://eedensoft.com/api/hello')
+    fetch(`${SERVICE_BASE_URL}/api/hello`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}`);

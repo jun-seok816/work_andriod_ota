@@ -1,8 +1,8 @@
 import { HotUpdater, insights } from '@hot-updater/react-native';
-import { OTA_BASE_URL, HOT_UPDATER_API_KEY } from '@env';
+import { SERVICE_BASE_URL, HOT_UPDATER_API_KEY } from '@env';
 
 export const hotUpdater = HotUpdater.init({
-  baseURL: OTA_BASE_URL,
+  baseURL: `${SERVICE_BASE_URL}/hot-updater`,
 
   requestHeaders: {
     'x-api-key': HOT_UPDATER_API_KEY,
