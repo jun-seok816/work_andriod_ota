@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { hotUpdater } from './src/hotUpdater';
 import { SERVICE_BASE_URL } from '@env';
+import useMain from './src/features/eeden/hooks/useMain';
+import { Example } from './src/features/eeden/class/Example';
+
 
 type HelloResponse = {
   message: string;
@@ -11,7 +14,8 @@ type HelloResponse = {
 function App() {
   const [data, setData] = useState<HelloResponse | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState('');  
+  const lv_Obj = useMain(()=> new Example());  
 
   useEffect(() => {
     fetch(`${SERVICE_BASE_URL}/api/hello`)
