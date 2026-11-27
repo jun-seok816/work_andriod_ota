@@ -633,7 +633,7 @@ process.exit(result.status ?? 1);
 NODE
 ```
 
-`drizzle.__drizzle_migrations`가 없으면 마이그레이션 미적용 여부 또는 구성 차이를 조사한다.`HelloOtaUpdater/src/check-db.ts`와 `check-drizzle.ts`도 SELECT만 하지만 `check-local-storage.ts`는 실제 파일 작성·삭제를 하므로 읽기 전용 점검 명령에 포함하지 않는다.
+`drizzle.__drizzle_migrations`가 없으면 마이그레이션 미적용 여부 또는 구성 차이를 조사한다.
 
 ## 12. 보안과 OTA 변경 범위
 
