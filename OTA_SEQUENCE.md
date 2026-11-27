@@ -88,11 +88,10 @@ LIMIT 1;
 HelloOtaStorage/bundles/                  # OTA_STORAGE_DIR
 ├── bundles/<bundle-id>/manifest.json
 ├── bundles/<bundle-id>/bundle.tar.br
-├── assets/sha256/<앞 2자리>/<hash>.br
-└── test/hello.txt
+└── assets/sha256/<앞 2자리>/<hash>.br
 ```
 
-분석 시 번들 디렉터리 3개와 공유 압축 asset 2개를 확인했다. 저장 루트 아래에 `bundles/`가 한 번 더 붙는 것은 CLI의 key 규칙 때문이다. manifest에는 `index.android.bundle`, 원본·다운로드 크기와 해시, archive 정보가 들어 있다. 설정상 Hermes 빌드이며, 이 조사에서 압축 파일을 실행해 검증하지는 않았다. `test/hello.txt`는 OTA 배포 산출물이 아니다.
+저장 루트 아래에 `bundles/`가 한 번 더 붙는 것은 CLI의 key 규칙 때문이다. manifest에는 `index.android.bundle`, 원본·다운로드 크기와 해시, archive 정보가 들어 있다. 설정상 Hermes 빌드이며, 이 조사에서 압축 파일을 실행해 검증하지는 않았다.
 
 - 내부 저장 식별자 예: `local-ota://bundles/bundles/<bundle-id>/manifest.json`
 - 앱 다운로드 URL 예: `http://10.0.2.2:3200/ota-files/bundles/<bundle-id>/manifest.json`
